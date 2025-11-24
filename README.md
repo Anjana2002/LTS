@@ -65,7 +65,7 @@ React, Axios, JSONPlaceholder API
 A React-based project using advanced state management and data handling.  
 
 **Technologies:**  
-React, Redux, RTK Query, TanStack  
+React, Redux, RTK Query, TanStack, Symfony 
 
 **Features:**  
 - Add, edit, and delete data entries  
