@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h2 style="text-align:center;">🎬 Upcoming Movies</h2>
+
+{% if movies is not empty %}
+<div class="movies-grid">
+    {% for movie in movies %}
+        <div class="movie-card">
+            <div class="poster">
+                {% if movie.poster %}
+                    <img src="{{ asset(movie.poster) }}" alt="{{ movie.title }}">
+                {% else %}
+                    <div class="no-poster">No Poster</div>
+                {% endif %}
+            </div>
+            <h3>{{ movie.title }}</h3>
+            <p><strong>Release Date:</strong> {{ movie.releaseDate|date('d M Y') }}</p>
+        </div>
+    {% endfor %}
+</div>
+{% else %}
+    <p style="text-align:center;">No upcoming movies found.</p>
+{% endif %}
+{% endblock %}

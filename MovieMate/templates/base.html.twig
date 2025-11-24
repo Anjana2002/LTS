@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}MovieMate{% endblock %}</title>
+    <link rel="icon" href="{{ asset('images/popcorn.png')}}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <link rel="stylesheet" href="{{ asset('anjana/styles.css') }}">
+</head>
+<body>
+<header class="navbar">
+    <div class="logo">
+        <img src="{{ asset('images/popcorn.png')}}" alt="MovieMate Logo" class="logo-image">
+        <h1 class="logo-text">MovieMate</h1>
+    </div>
+
+    {# <nav class="nav-links">
+        {% if app.session.get('roles') is defined %}
+            {% set roles = app.session.get('roles') %}
+            {% if 'ROLE_ADMIN' in roles %}
+                <a href="{{ path('admin_home') }}">Home</a>
+            {% elseif 'ROLE_USER' in roles %}
+                <a href="{{ path('user_home', { 'userId': app.session.get('user_id') }) }}">Home</a>
+            {% else %}
+                <a href="{{ path('app_home') }}">Home</a>
+            {% endif %}
+        {% else %}
+            <a href="{{ path('app_home') }}">Home</a>
+        {% endif %}
+
+        <a href="{{ path('app_upcoming' )}}">Upcoming Movies</a>
+        <a href="#">Now Showing</a>
+        <a href="{{ path('app_about' )}}">About</a>
+
+        <div class="login-dropdown">
+        {% if app.session.get('username') %}
+            <a href="#" class="login-link">
+                <img src="{{ asset('images/user.png') }}" alt="User Icon" class="login-icon">
+                {{ app.session.get('username') }}
+            </a>
+            <div class="dropdown-menu show">
+                <a href="{{ path('app_logout') }}">Logout</a>
+                <a href="{{ path('app_my_tickets', { 'userId': app.session.get('user_id')}) }}">My Tickets</a>
+            </div>
+        {% else %}
+            <a href="#" class="login-link">
+                <img src="{{ asset('images/user.png') }}" alt="Login Icon" class="login-icon">
+            </a>
+            <div class="dropdown-menu">
+                <a href="{{ path('app_login') }}">Login</a>
+                <a href="{{ path('app_register') }}">Register</a>
+            </div>
+        {% endif %}
+    </div>
+
+    </nav> #}
+    <nav class="nav-links">
+    {% if app.user %}
+        {% set roles = app.user.roles %}
+        {% if 'ROLE_ADMIN' in roles %}
+            <a href="{{ path('admin_home') }}">Home</a>
+        {% elseif 'ROLE_USER' in roles %}
+            <a href="{{ path('user_home', { 'userId': app.user.id }) }}">Home</a>
+        {% else %}
+            <a href="{{ path('app_home') }}">Home</a>
+        {% endif %}
+    {% else %}
+        <a href="{{ path('app_home') }}">Home</a>
+    {% endif %}
+
+    <a href="{{ path('app_upcoming') }}">Upcoming Movies</a>
+    <a href="#">Now Showing</a>
+    <a href="{{ path('app_about') }}">About</a>
+
+    <div class="login-dropdown">
+        {% if app.user %}
+            <a href="#" class="login-link">
+                <img src="{{ asset('images/user.png') }}" alt="User Icon" class="login-icon">
+                {{ app.user.username }}
+            </a>
+            <div class="dropdown-menu show">
+                <a href="{{ path('app_logout') }}">Logout</a>
+                {% if 'ROLE_USER' in app.user.roles %}
+                    <a href="{{ path('app_my_tickets') }}">My Tickets</a>
+                {% endif %}
+            </div>
+        {% else %}
+            <a href="#" class="login-link">
+                <img src="{{ asset('images/user.png') }}" alt="Login Icon" class="login-icon">
+            </a>
+            <div class="dropdown-menu">
+                <a href="{{ path('app_login') }}">Login</a>
+                <a href="{{ path('app_register') }}">Register</a>
+            </div>
+        {% endif %}
+    </div>
+</nav>
+
+</header>
+
+<main>
+    {% block body %}{% endblock %}
+</main>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{{ asset('js/main.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block admin_content %}
+<div class='button-container'>
+    <a href="{{ path('add_movies' )}}" class="movie-button">Add Movie</a>
+    <a href="{{ path('edit_movies')}}" class="movie-button">Edit Movie</a>
+    <a href="{{ path('delete_movies')}}" class="movie-button">Delete Movie</a>
+</div>
+
+{% endblock %}

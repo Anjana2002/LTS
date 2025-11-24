@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<div class="booking-container">
+    <div class="movie-section">
+        <div class="poster-large">
+            {% if movie.poster %}
+                <img src="{{ asset(movie.poster) }}" alt="{{ movie.title }}">
+            {% else %}
+                <div class="no-poster">No Poster</div>
+            {% endif %}
+        </div>
+        <div class="details">
+            <h2>{{ movie.title }}</h2>
+            <p><strong>Genre:</strong> {{ movie.genre }}</p>
+            <p><strong>Duration:</stron g> {{ movie.duration|date('H:i') }}</p>
+            <p><strong>Director:</strong> {{ movie.director }}</p>
+            <p><strong>Cast:</strong> {{ movie.cast }}</p>
+            <div class="showtime-section">
+                <h3>Available Theatres</h3>
+
+                {% if showTimes is not empty %}
+                    <div class="theatre-list">
+                        {% for theatre in showTimes %}
+                            <a href="{{ path('app_booking_theatre', {'userId': app.session.get('user_id'),'movieId': movie.id, 'theatreId': theatre.id}) }}" class="theatre-btn">
+
+                                {{ theatre.name }}
+                            </a>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p>No theatres available for this movie.</p>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

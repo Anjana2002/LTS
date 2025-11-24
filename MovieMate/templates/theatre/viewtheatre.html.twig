@@ -1,0 +1,32 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block admin_content %}
+<div class="register-page">
+    <div class="registration-form">
+        <h2>All Theatres</h2>
+        <table class="theatre-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Location</th>
+                    <th>Total Seats</th>              
+                    <th>Ticket Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for theatre in theatres %}
+                    <tr>
+                        <td>{{ theatre.name }}</td>
+                        <td>{{ theatre.location }}</td>
+                        <td>{{ theatre.totalSeats }}</td>
+                        
+                        <td>{{ theatre.ticketPrice }}</td>
+                    </tr>
+                {% else %}
+                    <tr><td colspan="5">No theatres added yet.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

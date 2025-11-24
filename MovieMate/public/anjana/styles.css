@@ -1,0 +1,446 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #000;
+    color: #fff;
+
+}
+*{
+    margin:0
+}
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #111;
+    color: #fff;
+    padding: 15px 1px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+}
+
+main {
+    margin-top: 100px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo img {
+    width: 50px;
+    height: 50px;
+}
+
+.logo-text {
+    font-size: 3.5rem;
+    color: #f5c518;
+    margin: 0;
+    
+}
+
+.nav-links a {
+    color: #f5f5f5;
+    text-decoration: none;
+    margin: 0 20px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+    font-size: 1.5rem;
+}
+
+.nav-links a:hover {
+    color: #f5c518;
+}
+
+.home {
+    text-align: center;
+    padding: 100px 20px;
+    background: linear-gradient(to bottom, #000, #111);
+}
+
+.home h2 {
+    font-size: 2.5rem;
+    color: #f5c518;
+    margin-bottom: 20px;
+}
+
+.home p {
+    font-size: 1.2rem;
+    color: #ddd;
+}
+
+.login-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 40px;
+    background-color: #111;
+    border: 1px solid #333;
+    border-radius: 6px;
+    min-width: 130px;
+    text-align: left;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px 15px;
+    color: #f5f5f5;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+}
+
+.dropdown-menu a:hover {
+    background-color: #f5c518;
+    color: #000;
+}
+
+/* When JS adds .show, display it */
+.dropdown-menu.show {
+    display: block;
+}
+
+.register-page {
+    margin-top: 2%; /* spacing from top (below navbar) */
+}
+
+.registration-form {
+    width: 400px;
+    padding: 30px;
+    background-color: #111;
+    border: 2px solid #f5c518;
+    border-radius: 12px;
+    color: #fff;
+    box-shadow: 0 0 20px rgba(245,197,24,0.5);
+
+    /* center horizontally using margin */
+    margin: 80px auto; /* auto horizontally centers */
+}
+
+
+.registration-form h2 {
+    text-align: center;
+    color: #f5c518;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #f5c518;
+    background-color: #000;
+    color: #fff;
+}
+
+.btn-primary {
+    width: 50%;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    background-color: #f5c518;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+    display: block; 
+    margin: 0 auto; 
+    text-align: center;
+}
+
+
+.btn-primary:hover {
+    background-color: #e0b800;
+}
+
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    height: calc(100vh - 80px);
+    margin-top: 80px;        
+}
+
+.login-form {
+    width: 400px;
+    padding: 30px;
+    background-color: #111;
+    border: 2px solid #f5c518;
+    border-radius: 12px;
+    color: #fff;
+    box-shadow: 0 0 20px rgba(245,197,24,0.5);
+    text-align: center;
+}
+.login-form h2 {
+    text-align: center;
+    color: #f5c518;
+    margin-bottom: 20px;
+}
+.admin-container {
+    display: flex;
+    min-height: 100vh;
+    background-color: #000;
+    color: #fff;
+}
+
+
+.sidebar {
+    width: 250px;
+    background-color: #111;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    border-right: 2px solid #f5c518;
+    box-shadow: 2px 0 10px rgba(245,197,24,0.2);
+}
+
+.sidebar h2 {
+    color: #f5c518;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.sidebar a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    padding: 12px 10px;
+    margin: 5px 0;
+    border-radius: 6px;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.sidebar a:hover {
+    background-color: #f5c518;
+    color: #000;
+}
+
+.admin-content {
+    flex: 1;
+    padding: 40px;
+    background: linear-gradient(to bottom, #000, #111);
+}
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+    gap: 15px;
+    margin-top: 15%; 
+}
+.movie-button {
+    display: inline-block;
+    margin: 10px;
+    padding: 15px 25px;
+    background-color: #f5c518;
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: background 0.3s ease;
+
+    
+}
+.admin-container {
+    display: flex;
+    min-height: 100vh;
+    background-color: #121212;
+    
+}
+
+.admin-content {
+    flex-grow: 1;
+    padding: 30px;
+    
+}
+
+
+.movies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    justify-content: center;
+}
+
+.movie-card {
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    text-align: center;
+    padding: 15px;
+    transition: transform 0.2s ease;
+    justify-content: space-between;
+    height: 400px;
+}
+
+.movie-card:hover {
+    transform: translateY(-5px);
+}
+
+.movie-card img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.movie-card h3 {
+    margin: 10px 0 5px;
+}
+
+.no-poster {
+    width: 100%;
+    height: 280px;
+    background: #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #555;
+    border-radius: 8px;
+}
+.btn {
+    display: inline-block;   
+    margin-top: 15px;  
+    padding: 10px 15px;
+    background-color: #f5c518;
+    color: #000;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease;
+    text-decoration: none; 
+    text-align: center;
+}
+.theatre-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    border: 2px solid #ddd; 
+}
+
+.theatre-table th, .theatre-table td {
+    border: 1px solid #ddd; 
+    padding: 10px;
+    text-align: center;
+}
+
+.theatre-table th {
+    background-color: #f5c518;
+    color: #000;
+    font-weight: bold;
+}
+.booking-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.movie-section {
+    display: flex;
+    gap: 40px;
+    align-items: stretch;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    max-width: 1200px;
+    width: 100%;
+    min-height: 600px; 
+}
+
+
+.poster-large {
+    flex: 1; 
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.poster-large img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+}
+
+
+.details {
+    flex: 1;
+    padding: 20px 30px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+}
+
+.details h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    color: #222;
+}
+
+.details p {
+    margin: 10px 0;
+    font-size: 1.1rem;
+    color: #444;
+}
+
+.theatre-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.theatre-btn,
+#book-btn {
+    background-color: #ff5c33;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+    text-decoration: none;
+}
+
+.theatre-btn:hover {
+    background-color: #ff784e;
+}
+.showtime-section {
+    margin-top: 30px;
+}
+
+.showtime-section h3 {
+    margin-bottom: 10px;
+    color: #222;
+    font-size: 1.3rem;
+}
+
+.seat.selected {
+     background-color: #6c6;
+}
+.seat.booked {
+     background-color: #c33; 
+     color: #fff; 
+     cursor: not-allowed; 
+}

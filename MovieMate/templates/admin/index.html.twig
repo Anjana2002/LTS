@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="admin-container">
+		<div class="sidebar">
+			<h2>Admin Panel</h2>
+			<a href="{{ path('admin_movies') }}">Movies</a>
+			<a href="{{ path('admin_theatre') }}">Theatre</a>
+			<a href="{{ path('admin_show_time') }}">Showtimes</a>
+			<a href="#">Reservation</a>
+			<a href="#">Users</a>
+			<a href="#">Reports</a>
+			<a href="">Technical Support</a>
+		</div>
+
+		<div class="admin-content">
+			{% block admin_content %}
+				<h2>All Movies</h2>
+				<div class="movies-grid">
+					{% for movie in movies %}
+						<div class="movie-card">
+							<div class="poster">
+								{% if movie.poster %}
+									<img src="{{ asset(movie.poster) }}" alt="{{ movie.title }}">
+								{% else %}
+									<div class="no-poster">No Poster</div>
+								{% endif %}
+							</div>
+							<h3>{{ movie.title }}</h3>
+							<p>
+								<strong>Genre:</strong>
+								{{ movie.genre }}</p>
+							<p>
+								<strong>Director:</strong>
+								{{ movie.director }}</p>
+							<p>
+								<strong>Release:</strong>
+								{{ movie.releaseDate|date('Y-m-d') }}</p>
+						</div>
+					{% else %}
+						<p>No movies added yet.</p>
+					{% endfor %}
+				</div>
+
+			{% endblock %}
+		</div>
+	</div>
+{% endblock %}

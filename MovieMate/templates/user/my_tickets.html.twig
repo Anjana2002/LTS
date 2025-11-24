@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h2 style="text-align:center;">My Tickets 🎟️</h2>
+
+<div style="display: flex; justify-content: center; margin-top: 20px;">
+    {% if tickets is not empty %}
+        <table border="1" cellpadding="10" cellspacing="0" style="border-collapse: collapse; text-align: center;">
+            <thead>
+                <tr>
+                    <th>Movie</th>
+                    <th>Theatre</th>
+                    <th>Showtime</th>
+                    <th>Seats</th>
+                    <th>Number of Seats</th>
+                    <th>Total Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ticket in tickets %}
+                    <tr>
+                        <td>{{ ticket.showId.movie.title }}</td>
+                        <td>{{ ticket.showId.theatre.name }}</td>
+                        <td>{{ ticket.showId.showTime|date('d M Y H:i') }}</td>
+                        <td>{{ ticket.selectedSeats }}</td>
+                        <td>{{ ticket.noSeats }}</td>
+                        <td>{{ ticket.totalPrice }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No tickets booked yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

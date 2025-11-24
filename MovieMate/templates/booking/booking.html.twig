@@ -1,0 +1,129 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="booking-container">
+    <div class="movie-section">
+        <div class="poster-large">
+            {% if movie.poster %}
+                <img src="{{ asset(movie.poster) }}" alt="{{ movie.title }}">
+            {% else %}
+                <div class="no-poster">No Poster</div>
+            {% endif %}
+        </div>
+        <div class="details">
+            <h2>{{ movie.title }}</h2>
+            <h3>Available Showtimes</h3>
+            {% if showTimes is not empty %}
+            <div class="theatre-list">
+                 {% for show in showTimes %}
+                     <button type="button" class="theatre-btn"
+                            data-showtime-id="{{ show.id }}"
+                            data-total-seats="{{ show.theatre.totalSeats }}"
+                            data-ticket-price="{{ show.theatre.ticketPrice}}">
+                        {{ show.showTime|date('h:i A') }}
+                    </button>
+                {% endfor %}
+            </div>                 
+            <div class="seat-container" id="seat-container" style="margin-top:10px;"></div>
+             <button type="button" id="book-btn" style="margin-top:10px; display:none;">Book Selected Seats</button>   
+            {% else %}
+            <p>No showtimes available for this theatre.</p>
+            {% endif %}
+            <div id="ticket-info" style="margin-top: 15px;">
+            <p id="total-price" style="font-size: 16px; color: green; font-weight: bold;"></p>
+        </div>
+        </div>
+    </div> 
+</div>
+<script>
+$(document).ready(function() {
+
+    let selectedSeats = [];
+    let currentShowtimeId = null;
+    let totalSeats = 0;
+    let bookedSeats = {{ bookedSeats|json_encode|raw }};
+
+    $('.theatre-btn').click(function() {
+        selectedSeats = [];
+        $('#book-btn').hide();
+        $('#total-price').text('');
+        
+        currentShowtimeId = $(this).data('showtime-id');
+        totalSeats = $(this).data('total-seats');
+        ticketPrice = $(this).data('ticket-price');
+        $('#ticket-price').text(`Ticket Price: ${ticketPrice}`);
+        const container = $('#seat-container');
+        container.empty();
+        const currentBookedSeats = bookedSeats[currentShowtimeId] || [];
+        for (let i = 1; i <= totalSeats; i++) {
+            const isBooked = currentBookedSeats.includes(i.toString());
+            container.append(`<div class="seat" 
+                data-seat-number="${i}" 
+                style="display:inline-block; width:30px; height:30px; border:1px solid #000; margin:2px; text-align:center; line-height:30px; cursor:${isBooked ? 'not-allowed' : 'pointer'}; background-color:${isBooked ? '#c33' : ''}">
+                ${i}
+            </div>`);
+        }
+
+
+        $('#book-btn').show();
+    });
+
+    // Click seat box
+    $(document).on('click', '.seat', function() {
+        const seatNum = $(this).data('seat-number');
+        if ($(this).hasClass('booked')) return;
+
+        if ($(this).hasClass('selected')) {
+            $(this).removeClass('selected').css('background-color','');
+            selectedSeats = selectedSeats.filter(s => s !== seatNum);
+        } else {
+            $(this).addClass('selected').css('background-color','#6c6');
+            selectedSeats.push(seatNum);
+        }
+        const totalPrice = selectedSeats.length * ticketPrice;
+        if (selectedSeats.length > 0) {
+            $('#total-price').text(`Total Price: ₹${totalPrice}`);
+        } 
+    });
+
+    // Book button
+    $('#book-btn').click(function() {
+        if(selectedSeats.length === 0) {
+            alert('Select at least one seat.');
+            return;
+        }
+
+        $.ajax({
+            url: "{{ path('app_book_seats', { 'userId': app.session.get('user_id') }) }}",
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                showtimeId: currentShowtimeId,
+                seats: selectedSeats
+            }),
+            success: function(response) {
+            console.log(response);
+            if (response.success) {
+                bookedSeats[currentShowtimeId] = bookedSeats[currentShowtimeId] || [];
+                bookedSeats[currentShowtimeId].push(...selectedSeats.map(String));
+
+                selectedSeats.forEach(seatNum => {
+                    $(`.seat[data-seat-number='${seatNum}']`)
+                        .removeClass('selected')
+                        .addClass('booked')
+                        .css('background-color', '#c33');
+                });
+                alert('Seats booked successfully!');
+            } else {
+                alert(response.message);
+            }
+        },
+            error: function(xhr) {
+                console.error(xhr.responseText);
+                alert('Error booking seats. See console for details.');
+            }
+        });
+    });
+});
+</script>
+{% endblock %}
+

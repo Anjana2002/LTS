@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="home">
+    <h2>Welcome to MovieMate 🎬</h2>
+    <p>Book your favorite movies easily and enjoy your show!</p>
+</div>
+
+<h2>Now Showing</h2>
+
+<div class="movies-grid">
+    {% for movie in movies %}
+        <div class="movie-card">
+            <div class="poster">
+                {% if movie.poster %}
+                    <img src="{{ asset(movie.poster) }}" alt="{{ movie.title }}">
+                {% else %}
+                    <div class="no-poster">No Poster</div>
+                {% endif %}
+            </div>
+            <h3>{{ movie.title }}</h3>
+            <p><strong>Genre:</strong> {{ movie.genre }}</p>
+            <p><strong>Duration:</strong> {{ movie.duration|date('H:i') }}</p>
+            <a href="{{ path('app_booking', { 'id': movie.id }) }}" class="btn">Book Ticket</a>
+        </div>
+    {% else %}
+        <p>No movies available now.</p>
+    {% endfor %}
+</div>
+{% endblock %}

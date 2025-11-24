@@ -1,0 +1,46 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block admin_content %}
+<div class="register-page">
+    <div class="registration-form">
+        <h2>Add Show Time</h2>
+
+        <form method="post" action="{{ path('add_show_time') }}">
+            <div class="form-group">
+                <label for="movie">Movie</label>
+                <select name="movie_id" id="movie" class="form-control" required>
+                    <option value="">Select Movie</option>
+                    {% for movie in movies %}
+                        <option value="{{ movie.id }}">{{ movie.title }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="theatre">Theatre</label>
+                <select name="theatre_id" id="theatre" class="form-control" required>
+                    <option value="">Select Theatre</option>
+                    {% for theatre in theatres %}
+                        <option value="{{ theatre.id }}">{{ theatre.name }} - {{ theatre.location }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="show_time">Show Time</label>
+                <input type="time" name="show_time" id="show_time" class="form-control" required>
+            </div>
+
+            <button type="submit" class="btn-primary">Add Show Time</button>
+        </form>
+
+        <div class="flash-messages">
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="flash-{{ label }}">{{ message }}</div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
