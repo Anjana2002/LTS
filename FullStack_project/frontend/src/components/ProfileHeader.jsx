@@ -28,32 +28,50 @@ export default function ProfileHeader() {
         navigate("/login");
     };
     const profilePhoto = user?.profilePhoto ? `${API_URL}${user.profilePhoto}` : profileIcon;
-    return (
-        <>
-            <div className="pro-header">
-                <h1 className="profile-title">ExpenseTracker</h1>
-                <div className="nav-links">
-                    <img src={profilePhoto} alt={user?.name || "Profile"} className="profile-icon" onClick={() => setIsModalOpen(true)} />
-                </div>
-            </div>
-            {isModalOpen && user && (
-                <div className="modal-backdrop" onClick={() => setIsModalOpen(false)}>
-                    <div className="profile-modal" onClick={(e) => e.stopPropagation()}>
-                        <img
-                            src={profilePhoto}
+   return (
+  <>
+    {/* Header */}
+    <div className="flex justify-between items-center bg-[#282c34] text-white px-6 py-4 shadow-md">
+      <h1 className="text-xl font-bold tracking-wide">ExpenseTracker</h1>
 
-                            alt={user.name}
-                            className="modal-profile-photo"
-                        />
-                        <h2>{user.name}</h2>
-                        <button className="logout-btn" onClick={handleLogout}>
-                            Logout
-                        </button>
-                    </div>
-                </div>
+      <div className="cursor-pointer">
+        <img
+          src={profilePhoto}
+          alt={user?.name || "Profile"}
+          className="w-10 h-10 rounded-full object-cover border-2 border-white hover:scale-105 transition"
+          onClick={() => setIsModalOpen(true)}
+        />
+      </div>
+    </div>
 
-            )}
-        </>
-    );
+    {/* Modal */}
+    {isModalOpen && user && (
+      <div
+        className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center backdrop-blur-sm"
+        onClick={() => setIsModalOpen(false)}
+      >
+        <div
+          className="bg-white rounded-xl p-6 shadow-xl text-center max-w-sm w-full"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <img
+            src={profilePhoto}
+            alt={user.name}
+            className="w-24 h-24 rounded-full object-cover mx-auto border-4 border-gray-200"
+          />
+          <h2 className="text-lg font-semibold text-gray-800 mt-3">{user.name}</h2>
+
+          <button
+            className="mt-4 w-full bg-red-500 hover:bg-red-600 text-white py-2 rounded-lg font-medium transition"
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
+        </div>
+      </div>
+    )}
+  </>
+);
+
 
 }

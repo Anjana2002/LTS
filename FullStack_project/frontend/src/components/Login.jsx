@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 export default function Login() {
     const [formData, setFormData] = useState({
         email: "",
-        password:"",
+        password: "",
     });
     const [message, setMessage] = useState("");
     const navigate = useNavigate();
@@ -15,10 +15,10 @@ export default function Login() {
             [e.target.name]: e.target.value
         });
     };
-    
-    const handleSubmit = async (e) =>{
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        try{
+        try {
             const res = await axios.post(
                 `${import.meta.env.VITE_API_URL}/login`,
                 {
@@ -29,9 +29,9 @@ export default function Login() {
             localStorage.setItem("token", res.data.token);
 
             setMessage(res.data.message || "Login successful!");
-            setFormData({email: "", password: ""});
+            setFormData({ email: "", password: "" });
             navigate("/dashboard/profile");
-        } catch(error){
+        } catch (error) {
             setMessage("Login failed. Please try again.");
         }
     };
@@ -43,10 +43,18 @@ export default function Login() {
                 <input type="email" name="email" value={formData.email} onChange={handleChange} required />
                 <label>Password:</label>
                 <input type="password" name="password" value={formData.password} onChange={handleChange} required />
-                <button type="submit" className="submit-btn">Login</button>
+                {/* <button type="submit" className="submit-btn">Login</button> */}
+                <button
+                    type="submit"
+                    className="bg-[#282c34] hover:bg-[#1f242b] text-white px-4 py-2 rounded-md transition-colors"
+                >
+                    Login
+                </button>
+
+
             </form>
             {message && <p className="form-message">{message}</p>}
-            
+
         </div>
     )
 }
