@@ -5,7 +5,7 @@ import Footer from "./components/Footer";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Register from "./components/Register";
-
+import Admin from "./components/Admin"
 function MainLayout() {
   return (
     <div className="min-h-screen flex flex-col">
@@ -26,12 +26,9 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/service" element={
-              <div className="text-center p-10 text-2xl bg-blue-50 flex-1">Our Services Page Content</div>
-          } />
-          <Route path="*" element={
-              <div className="text-center p-10 text-2xl bg-blue-50 flex-1">404 - Page Not Found</div>
-          } />
+          <Route path="/admin" element={<Admin />}>
+
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
