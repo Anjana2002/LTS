@@ -1,5 +1,3 @@
-// src/components/AdminSidebar.jsx
-
 import { Home, User, Calendar, Briefcase, FileText, Plus, Eye } from 'lucide-react';
 
 const sidebarNavItems = [
