@@ -1,4 +1,4 @@
-// src/components/Admin.jsx
+
 
 import AdminSidebar from "./AdminSidebar";
 import { Users, Calendar, Stethoscope, Clock, CheckCircle, Plus, FileText } from 'lucide-react'; // Import icons
