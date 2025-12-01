@@ -6,6 +6,8 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Admin from "./components/Admin";
 import AdminHeader from "./components/AdminHeader";
+import Logout from "./components/Logout";
+import Protected from "./components/Protected";
 
 function MainLayout() {
   return (
@@ -39,11 +41,13 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Route>
-        <Route element={<AdminLayout />}>
-          <Route path="/admin" element={<Admin />} />
-        </Route>
 
+        <Route element={<Protected><AdminLayout /></Protected>}>
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/logout" element={<Logout />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
 }
+
