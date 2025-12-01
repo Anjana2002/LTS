@@ -45,6 +45,7 @@ export default function App() {
         <Route element={<Protected><AdminLayout /></Protected>}>
           <Route path="/admin" element={<Admin />} />
           <Route path="/logout" element={<Logout />} />
+     
         </Route>
       </Routes>
     </BrowserRouter>
